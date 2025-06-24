@@ -6,7 +6,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <ArduinoJson.h>
-
+#include <esp_sleep.h>
 struct tm data;
 #define TRIG_PIN 5   // Pino TRIG do sensor ultrassonico
 #define ECHO_PIN 18  // Pino ECHO do sensor ultrassonico
@@ -228,5 +228,6 @@ void loop() {
       }
     }
   }
-  delay(500);
+  esp_sleep_enable_timer_wakeup(30 * 1000000);  // 30 segundos
+  esp_light_sleep_start();
 }
