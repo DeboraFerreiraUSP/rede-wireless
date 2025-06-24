@@ -6,7 +6,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <ArduinoJson.h>
-
+#include <esp_sleep.h>
 // Pinos do sensor ultrassônico
 #define TRIG_PIN 5
 #define ECHO_PIN 18
@@ -152,5 +152,6 @@ void loop() {
   }
 
   Serial.println(respostaRecebida ? "✅" : "⚠️");
-  delay(30000);
+  esp_sleep_enable_timer_wakeup(30 * 1000000);  // 30 segundos
+  esp_light_sleep_start();
 }
